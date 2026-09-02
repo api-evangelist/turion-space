@@ -1,0 +1,59 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  https://starfire.turionspace.com/assets/index-Bvr-pAIX.js (the provider's own published STARFIRE
+  dashboard bundle) and https://app.turionspace.com/config.js
+note: >-
+  Turion Space publishes NO machine-readable contract, so no cross-cutting API standard can be
+  asserted from a spec. Every row below is scored against what was actually observable anonymously.
+  The domain-standard row is recorded because the signature is real and first-party, but it was seen
+  in the PRODUCT UI, not DECLARED in a published contract — which is the distinction
+  domain_standard_conformance is meant to draw, so it is marked declared_in_contract: false and no
+  `Compliance` pointer is emitted.
+contract_available: false
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger document at any probed location on www.turionspace.com,
+    api.app.turionspace.com, starfire.turionspace.com or app.turionspace.com. See
+    well-known/turion-space-well-known.yml.
+- id: oauth2
+  conforms: unknown
+  evidence: >-
+    The auth application bundle carries Ory OAuth2/OIDC client code, but no authorization-server
+    metadata document is served, so conformance cannot be verified anonymously.
+- id: oidc
+  conforms: unknown
+  evidence: No /.well-known/openid-configuration on any host (404 or SPA shell).
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    The gateway's anonymous error envelope is {"error_msg":"404 Route Not Found"} served as
+    text/plain or application/json — not application/problem+json, and it carries none of the RFC
+    9457 members (type/title/status/detail/instance).
+- id: rfc9116
+  conforms: false
+  evidence: No /.well-known/security.txt served on any host.
+- id: pagination
+  conforms: unknown
+  evidence: No public contract or reference documents a pagination convention.
+- id: idempotency
+  conforms: unknown
+  evidence: No public contract or reference documents idempotency keys.
+domain_standards:
+- id: norad-tle
+  name: NORAD Two-Line Element set / NORAD catalog ID
+  market: Space domain awareness / satellite tasking
+  conforms: true
+  declared_in_contract: false
+  evidence: >-
+    The STARFIRE tasking-order surface enumerates pointing modes NORAD_ID, TLE, QUATERNION and
+    EPHEMERIS, with the provider's own tooltip text "Submit orbital parameters via Two-Line Element
+    set to track and image resident space objects." A customer can therefore task Turion imagery
+    using the standard NORAD catalog identifier and TLE interchange formats rather than a bespoke
+    Turion orbit format. Observed in
+    https://starfire.turionspace.com/assets/index-Bvr-pAIX.js; not published in any contract.
+  note: >-
+    The EPHEMERIS pointing mode is present but rendered disabled in the shipped bundle, so it is
+    recorded as an announced-but-inactive surface rather than a live one.

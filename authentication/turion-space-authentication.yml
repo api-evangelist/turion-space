@@ -1,0 +1,51 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  https://app.turionspace.com/config.js (the provider's own runtime configuration, served
+  unauthenticated) and the provider's own published dashboard bundles
+  https://starfire.turionspace.com/assets/index-Bvr-pAIX.js and
+  https://app.turionspace.com/assets/index-CV8WCmB3.js
+note: >-
+  Turion Space publishes NO authentication documentation of any kind. Everything below is observed
+  from first-party assets the provider serves anonymously, not from a documented auth reference. It
+  is recorded so the gap is legible; it is NOT a substitute for the provider publishing an auth page,
+  and no `Authentication` pointer is emitted in apis.yml because the check it feeds asks whether the
+  PROVIDER documents authentication, and they do not.
+documented_publicly: false
+api: Turion Space STARFIRE API
+base_url: https://api.app.turionspace.com
+schemes:
+- id: starfire-session
+  type: oauth2
+  confidence: medium
+  evidence: >-
+    app.turionspace.com is titled "Turion Space: Authentication" and its bundle carries Ory
+    (OAuth2/OIDC) client code; the STARFIRE dashboard bundle calls
+    https://api.app.turionspace.com/api/v1/auth. The grant types, authorization/token endpoints,
+    issuer and scopes are NOT discoverable anonymously — no OIDC discovery document is served on any
+    Turion host (see well-known/turion-space-well-known.yml).
+  discovery_document: null
+- id: starfire-api-key
+  type: apiKey
+  confidence: medium
+  evidence: >-
+    The STARFIRE dashboard bundle contains the route "/api/v1/users/api-key", indicating the product
+    issues per-user API keys from within the authenticated dashboard. The header or query parameter
+    the key is presented in, its prefix, its lifetime and its revocation semantics are all
+    undocumented and were NOT observed.
+  header: unknown
+  prefix: unknown
+anonymous_behaviour:
+  probe: GET https://api.app.turionspace.com/api/v1/tasking-orders
+  status: 404
+  body: '{"error_msg":"404 Route Not Found"}'
+  interpretation: >-
+    The gateway does not distinguish an unauthenticated caller from an unknown route; it returns a
+    generic Go/Echo 404 envelope rather than a 401 with a WWW-Authenticate challenge. An agent cannot
+    tell from the wire whether it lacks credentials or asked for a path that does not exist.
+gaps:
+- No public authentication reference page.
+- No OIDC/OAuth discovery document on any host.
+- No documented scopes; scopes/ is intentionally not written.
+- No 401 challenge or WWW-Authenticate header on the public gateway.
+- No documented API key header, prefix, rotation or revocation policy.

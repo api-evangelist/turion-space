@@ -1,0 +1,40 @@
+generated: '2026-09-01'
+method: searched
+source: >-
+  npm registry search (registry.npmjs.org/-/v1/search?text=turion), PyPI (pypi.org/pypi/<name>/json
+  for turion, turionspace, turion-space, starfire-sdk), the Turion-Space and turionspace GitHub
+  organizations, and the Turion Space website.
+note: >-
+  NO FIRST-PARTY CLIENT LIBRARY EXISTS. Turion Space publishes no SDK on any package registry and no
+  SDK repository in either of its GitHub organizations. Two near-miss packages were found and
+  REJECTED on ownership: npm @turionintegrasi/sso-client belongs to PT Turion Integrasi (an unrelated
+  Indonesian company) and PyPI `turion` (0.0.2) is published by Turion.AI, also unrelated. No `SDKs`
+  or `Packages` pointer is emitted in apis.yml.
+package_count: 0
+official_package_count: 0
+packages: []
+registries_searched:
+- registry: npm
+  result: no first-party package
+  rejected:
+  - name: '@turionintegrasi/sso-client'
+    version: 1.0.0
+    published: '2026-05-25'
+    reason: Published by PT Turion Integrasi, an unrelated company. Not Turion Space.
+- registry: pypi
+  result: no first-party package
+  rejected:
+  - name: turion
+    version: 0.0.2
+    published: null
+    reason: Author is "Turion.AI", summary "Turion.AI". Unrelated to Turion Space.
+- registry: github
+  result: >-
+    Organization Turion-Space (verified: name "Turion Space", blog https://turionspace.com/) has 1
+    public repository, turion-hackathon-1, which is not a client library. Organization turionspace
+    has 0 public repositories.
+apis_yml_pointer: none
+pointer_rationale: >-
+  No canonical pointer is emitted for this artifact. The scored checks it would feed assert that the
+  PROVIDER publishes the surface, and this file records that they do not. A pointer here would turn a
+  documented absence into a scored presence.

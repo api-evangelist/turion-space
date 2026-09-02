@@ -1,0 +1,28 @@
+generated: '2026-09-01'
+method: searched
+source: >-
+  https://www.turionspace.com/sitemap.xml (walked in full), https://turionspace.com/pricing (404),
+  https://turionspace.com/contact (200), and the STARFIRE dashboard bundle
+  https://starfire.turionspace.com/assets/index-Bvr-pAIX.js
+note: >-
+  NO PUBLIC PRICING IS PUBLISHED. The Turion Space sitemap contains no pricing or plans page and
+  /pricing returns 404. The product does meter usage — the STARFIRE dashboard calls
+  /api/v1/credits/balance and /api/v1/stripe/checkout-session, so there is a real credit-based
+  commercial model with Stripe billing behind the customer login — but no tier, unit price, credit
+  rate or quota is stated anywhere a member of the public can reach. Commercial engagement runs
+  through the contact form and a sales conversation.
+plan_count: 0
+plans: []
+billing_model_observed:
+  type: prepaid-credits
+  processor: Stripe
+  evidence: >-
+    /api/v1/credits/balance and /api/v1/stripe/checkout-session routes plus https://js.stripe.com/v3
+    in the authenticated dashboard bundle. Values, rates and tiers are not public.
+pricing_url: null
+contact_sales_url: https://turionspace.com/contact
+apis_yml_pointer: none
+pointer_rationale: >-
+  No canonical pointer is emitted for this artifact. The scored checks it would feed assert that the
+  PROVIDER publishes the surface, and this file records that they do not. A pointer here would turn a
+  documented absence into a scored presence.

@@ -1,0 +1,30 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  Anonymous HTTP probes of https://api.app.turionspace.com/api/v1/tasking-orders,
+  /api/v1/credits/balance and /starfire, plus a full walk of the Turion Space sitemap for any
+  developer or limits documentation.
+note: >-
+  NO RATE LIMITS ARE DOCUMENTED AND NONE WERE OBSERVED. Turion Space publishes no developer
+  documentation of any kind, so there is no stated limit to record. Anonymous responses from the
+  STARFIRE gateway carry NO rate-limit headers — no X-RateLimit-*, no RateLimit-*, no Retry-After —
+  only content-type and `server: cloudflare`. Because every anonymous route returns a generic 404
+  rather than reaching the application, this probe cannot establish whether limits are signalled to
+  AUTHENTICATED callers; it establishes only that nothing is signalled publicly.
+limit_count: 0
+limits: []
+response_headers_observed: []
+exhaustion_status_code: null
+retry_after_header: false
+probes:
+- url: https://api.app.turionspace.com/api/v1/tasking-orders
+  status: 404
+  rate_limit_headers: none
+- url: https://api.app.turionspace.com/api/v1/credits/balance
+  status: 404
+  rate_limit_headers: none
+apis_yml_pointer: none
+pointer_rationale: >-
+  No canonical pointer is emitted for this artifact. The scored checks it would feed assert that the
+  PROVIDER publishes the surface, and this file records that they do not. A pointer here would turn a
+  documented absence into a scored presence.

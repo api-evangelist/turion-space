@@ -1,0 +1,120 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  Direct anonymous HTTP probes of the named /.well-known/ path list on every Turion Space host
+  reachable from apis.yml and from the provider's own published runtime config
+  (https://app.turionspace.com/config.js, which names URL_API_GATEWAY = https://api.app.turionspace.com).
+note: >-
+  NO WELL-KNOWN DOCUMENT IS SERVED. Every named path missed on every host. Two of the four hosts are
+  single-page applications whose catch-all route answers HTTP 200 with the same HTML app shell for any
+  path, including /.well-known/*; those rows are recorded as status 200 with shell: true and are
+  MISSES, not hits. No WellKnown, SecurityTxt, APICatalog or AgentCard pointer is emitted from this
+  probe, because no path returned a real document.
+hosts:
+- host: www.turionspace.com
+  note: Marketing site, published with Framer. Returns a real 404 status for unknown paths.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: api.app.turionspace.com
+  note: >-
+    The first-party STARFIRE API gateway (Go/Echo behind Cloudflare). Answers anonymously with a JSON
+    envelope {"error_msg":"404 Route Not Found"} and serves no discovery document.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/jwks.json
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+- host: starfire.turionspace.com
+  note: >-
+    STARFIRE Dashboard, a React SPA. Its catch-all route returns HTTP 200 with a 1,463-byte HTML app
+    shell for EVERY path probed. Recorded as shell responses; none is a document.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/api-catalog
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/agent.json
+    status: 200
+    shell: true
+    file: null
+- host: app.turionspace.com
+  note: >-
+    "Turion Space: Authentication" SPA. Same catch-all behaviour: HTTP 200 with a 1,738-byte HTML app
+    shell for every path. All rows are shell responses.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 200
+    shell: true
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 200
+    shell: true
+    file: null

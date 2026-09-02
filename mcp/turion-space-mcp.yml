@@ -1,0 +1,20 @@
+generated: '2026-09-01'
+method: none
+source: >-
+  Searched the Turion Space web surface, the Turion-Space and turionspace GitHub organizations, npm
+  and PyPI; probed every reachable Turion host for /.well-known/ai-plugin.json,
+  /.well-known/agent-card.json and MCP endpoint paths.
+status: absent
+note: >-
+  NO MCP SERVER EXISTS, hosted or local, and NONE WAS DERIVED. A candidate tool list cannot honestly
+  be derived either, because Turion Space publishes no OpenAPI or other machine-readable contract to
+  derive tools from — the operation names visible in the dashboard bundle are internal route strings,
+  not a published contract. No `MCPServer` pointer is emitted in apis.yml.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+tools: []
