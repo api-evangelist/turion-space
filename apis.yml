@@ -10,6 +10,20 @@ description: >-
   imagery tasking and Starfire NEXUS jobs against a Stripe-billed credit balance. The company
   publishes no public developer portal, API reference, or machine-readable specification; the entire
   contract sits behind the STARFIRE customer login.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  - rate-limits
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://www.turionspace.com/images/turion-favicon.svg
 url: https://raw.githubusercontent.com/api-evangelist/turion-space/refs/heads/main/apis.yml
 x-type: company
